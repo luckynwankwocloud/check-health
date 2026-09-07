@@ -6,7 +6,7 @@ on:
 
 jobs:
   preparation:
-    runs-on:ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: check the operating system
         run: uname -a
@@ -38,6 +38,3 @@ jobs:
     steps:
       - name: confirm completion
         run: echo "server health check completed successfully"
-           
-                           
-      
