@@ -3,44 +3,41 @@ on:
   push:
     branches:
       - main
+
 jobs:
   preparation:
-    runs-on: lucky-server
-
+    runs-on:ubuntu-latest
     steps:
       - name: check the operating system
         run: uname -a
 
   check_disk:
-    runs-on: lucky-server
+    runs-on: ubuntu-latest
     needs: preparation
-
     steps:
       - name: check the disk space
         run: df -h
 
   check_memory:
-    runs-on: lucky-server
+    runs-on: ubuntu-latest
     needs: check_disk
-
     steps:
       - name: check the memory usage
         run: free -h
 
   system_information:
-    runs-on: lucky-server
+    runs-on: ubuntu-latest
     needs: check_memory
-
     steps:
       - name: check hostname
         run: hostnamectl
 
   completion:
-    runs-on: lucky-server
+    runs-on: ubuntu-latest
     needs: system_information
-
     steps:
-      - name: confirm_completion
-        run: echo "server health check completed successfully"            
+      - name: confirm completion
+        run: echo "server health check completed successfully"
+           
                            
       
