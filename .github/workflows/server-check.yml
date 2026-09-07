@@ -1,0 +1,46 @@
+name: server health check
+on:
+  push:
+    branches:
+      - main
+jobs:
+  preparation:
+    runs-on: lucky-server
+
+    steps:
+      - name: check the operating system
+        run: uname -a
+
+  check_disk:
+    runs-on: lucky-server
+    needs: preparation
+
+    steps:
+      - name: check the disk space
+        run: df -h
+
+  check_memory:
+    runs-on: lucky-server
+    needs: check_disk
+
+    steps:
+      - name: check the memory usage
+        run: free -h
+
+  system_information:
+    runs-on: lucky-server
+    needs: check_memory
+
+    steps:
+      - name: check hostname
+        run: hostnamectl
+
+  completion:
+    runs-on: lucky-server
+    needs: system_information
+
+    steps:
+      - name: confirm_completion
+        run: echo "server health check completed successfully"            
+                           
+      
